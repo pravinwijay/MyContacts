@@ -15,7 +15,7 @@ function Login() {
             password
         }).then((res) => {
             console.log(res);
-            navigate("/home");
+            navigate("/contact");
         }).catch((err) => {
             console.log(err);
         })
