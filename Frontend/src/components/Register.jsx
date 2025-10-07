@@ -1,10 +1,12 @@
 "use client"
 import axios from "axios";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
     const [email, setEmail] = useState();
-    const[password, setPassword] = useState();
+    const [password, setPassword] = useState();
+    const navigate = useNavigate();
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -12,6 +14,7 @@ function Register() {
             email,
             password
         }).then((res) => {
+            navigate("/connexion");
             console.log(res);
         }).catch((err) => {
             console.log(err);
@@ -40,7 +43,7 @@ function Register() {
                         onChange={(e) => setPassword(e.target.value)} />
                 </div>
                 <button type="submit" className="text-white bg-orange-400 hover:bg-orange-600 focus:ring-4 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
-                    Submit
+                    S'inscrire
                 </button>
             </form>
         </>
@@ -48,3 +51,6 @@ function Register() {
 }
 
 export default Register
+
+// https://www.youtube.com/watch?v=ZVyIIyZJutM
+// https://www.youtube.com/watch?v=XOnmDZ9LNDM&t=265s
