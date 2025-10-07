@@ -5,6 +5,7 @@ const app = express();
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/user');
 const contactRoutes = require('./routes/contact');
+const cors = require('cors');
 require('dotenv').config();
 console.log('JWT Secret:', process.env.JWT_SECRET);
 
@@ -14,7 +15,7 @@ app.use('/swagger', swaggerUi.serve, swaggerUi.setup(specs));
 // BD
 mongoose.connect('mongodb+srv://pravinwijay:aUqGTZyHbNt3wvIw@mycontacts.t6bckyt.mongodb.net/mycontacts?retryWrites=true&w=majority&appName=MyContacts')
 .then(() => console.log('Connexion à MongoDB réussie'))
-.catch(() => console.log('Connexion à MongoDB échouée'));
+.catch((error) => console.log('Connexion à MongoDB échouée :', error));
 
 app.use(express.json());
 
@@ -26,6 +27,8 @@ app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
   next();
 });
+
+app.use(cors());
 
 // Routes
 app.get('/', (req, res) => {
