@@ -13,7 +13,7 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
+    axios.post(`${import.meta.env.VITE_API_URL}/api/user/login`, {
       email,
       password
     }).then((res) => {
