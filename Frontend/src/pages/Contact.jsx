@@ -20,7 +20,7 @@ function Contact() {
         setError(err.message);
       }
     };
-    fetchContacts();
+    fetch();
   }, []);
 
   return (
