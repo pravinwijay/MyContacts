@@ -1,5 +1,5 @@
 // Importations
-const Contact = require('../models/Contact');
+const Contact = require('../models/Contact.model');
 const contactController = require('../controllers/contact');
 
 // Mock du modèle Mongoose Contact (empêche toute requête réelle)

@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require('mongoose');
-const user = require("./user");
+const user = require("./User.model");
 
 const ContactSchema = mongoose.Schema({
     firstName: {type: String, required: true},
