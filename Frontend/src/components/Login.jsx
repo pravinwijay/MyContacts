@@ -24,7 +24,7 @@ function Login() {
 
   return (
     <>
-      <h1 className="mb-4 -4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">PAGE LOGIN</h1>
+      <h1 className="mb-4 -4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">SE CONNECTER</h1>
       <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
         <div className="mb-5">
           <label className="block mb-2 text-sm font-medium text-gray-900">Votre adresse mail</label>

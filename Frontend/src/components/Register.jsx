@@ -23,7 +23,7 @@ function Register() {
 
     return (
         <>
-            <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">PAGE REGISTER</h1>
+            <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">S'INSCRIRE</h1>
             <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
                 <div className="mb-5">
                     <label className="block mb-2 text-sm font-medium text-gray-900">Votre adresse mail :</label>

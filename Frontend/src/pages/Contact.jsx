@@ -40,47 +40,51 @@ function Contact() {
     }
   }
 
- const handleEdit = async (id, newName, newLastName, newNumber) => {
-  try {
-    const token = localStorage.getItem("token");
-    const res = await axios.put(
-      `http://localhost:3000/api/contact/${id}`,
-      { firstName: newName, lastName: newLastName, phone: newNumber }, 
-      { headers: { Authorization: `Bearer ${token}` } }
-    );
-    setContacts(contacts.map(c => c._id === id ? res.data : c));
-  } catch (err) {
-    console.error(err);
-  }
-};
+  const handleEdit = async (id, newName, newLastName, newNumber) => {
+    try {
+      const token = localStorage.getItem("token");
+      const res = await axios.put(
+        `http://localhost:3000/api/contact/${id}`,
+        { firstName: newName, lastName: newLastName, phone: newNumber },
+        { headers: { Authorization: `Bearer ${token}` } }
+      );
+      setContacts(contacts.map(c => c._id === id ? res.data : c));
+    } catch (err) {
+      console.error(err);
+    }
+  };
 
   return (
     <>
       {contacts.length === 0 ? (
         <h1>Vous n'avez aucun <b>contact</b></h1>
       ) : (
-        
-        <ul className="space-y-2 mt-7">
-                <h1>Vos <b>contacts</b></h1>
-          {contacts.map((contact) => (
-            <li key={contact._id} className="border p-2 rounded">
-              Nom : <strong>{contact.firstName}</strong> <br />
-              Prénom :<strong> {contact.lastName}</strong> <br />
-              Tél. : <strong>{contact.phone}</strong> <br />
-              <button
-                onClick={() => handleEdit(contact._id)}
-                className="text-indigo-800 px-2 py-1 rounded ml-5" >
-                Modifier
-              </button>
-              <button
-                onClick={() => handleDelete(contact._id)}
-                className="text-red-800 px-2 py-1 rounded ml-5" >
-                Supprimer
-              </button>
-            </li>
-          ))}
-        </ul>
+        <>
+          <ul className="space-y-2 mt-7">
+            <h1>Vos <b>contacts</b></h1>
+            {contacts.map((contact) => (
+              <li key={contact._id} className="border p-2 rounded">
+                Nom : <strong>{contact.firstName}</strong> <br />
+                Prénom :<strong> {contact.lastName}</strong> <br />
+                Tél. : <strong>{contact.phone}</strong> <br />
+                <button
+                  onClick={() => handleEdit(contact._id)}
+                  className="text-indigo-800 px-2 py-1 rounded ml-5" >
+                  Modifier
+                </button>
+                <button
+                  onClick={() => handleDelete(contact._id)}
+                  className="text-red-800 px-2 py-1 rounded ml-5" >
+                  Supprimer
+                </button>
+              </li>
+            ))}
+          </ul>
+        </>
       )}
+      <button className="text-white bg-amber-500 hover:bg-amber-600 focus:ring-4 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mr-5 mt-5">
+        <a href="/home">Retour à l'accueil</a>
+      </button>
     </>
   );
 }
