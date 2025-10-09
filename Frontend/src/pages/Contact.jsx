@@ -6,7 +6,6 @@ function Contact() {
   const [contacts, setContacts] = useState([]);
 
   useEffect(() => {
-<<<<<<< Updated upstream
     const fetch = async () => {
       try {
         const token = localStorage.getItem("token");
@@ -20,17 +19,11 @@ function Contact() {
         console.error("Erreur lors de la récupération des contacts :", err);
         setError(err.message);
       }
-=======
-    const fetchContacts = async () => {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/contact/all`);
-      setContacts(res.data);
->>>>>>> Stashed changes
     };
     fetchContacts();
   }, []);
 
   return (
-<<<<<<< Updated upstream
     <>
       {contacts.length === 0 ? (
         <h1>Vous n'avez aucun <b>contact</b></h1>
@@ -66,18 +59,6 @@ function Contact() {
         <a href="/createContact">Ajouter un contact</a>
       </button>
     </>
-=======
-    <div>
-      <h1>Mes Contacts</h1>
-      <ul>
-        {contacts.map((c) => (
-          <li key={c._id}>{c.firstName} {c.lastName} - {c.phone}</li>
-        ))}
-      </ul>
-      <Link to="/createContact">Créer un contact</Link>
-      <Link to="/">Retour</Link>
-    </div>
->>>>>>> Stashed changes
   );
 }
 
