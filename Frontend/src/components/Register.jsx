@@ -13,7 +13,7 @@ function Register() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post( `${API_URL}/api/auth/register`, {
+        axios.post( `${import.meta.env.VITE_API_URL}/api/auth/register`, {
             email,
             password
         }).then((res) => {

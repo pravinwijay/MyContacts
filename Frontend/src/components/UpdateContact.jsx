@@ -18,7 +18,7 @@ function UpdateContact() {
         try {
             const token = localStorage.getItem("token");
             const res = await axios.patch(
-                `${API_URL}/api/contact/${contact._id}`,
+                `${import.meta.env.VITE_API_URL}/api/contact/${contact._id}`,
                 {
                     firstName,
                     lastName,
