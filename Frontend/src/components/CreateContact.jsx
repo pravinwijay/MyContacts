@@ -1,43 +1,51 @@
-import axios from "axios"
-import { useState } from "react"
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 function CreateContact() {
-    const [firstName, setFirstName] = useState("")
-    const [lastName, setLastName] = useState("")
-    const [phone, setNumber] = useState("")
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const token = localStorage.getItem("token");
-            const res = await axios.post(`${import.meta.env.VITE_API_URL}/api/contact/`, 
-                { firstName, lastName, phone}, 
-                { headers: { Authorization: `Bearer ${token}` } })
-            
-        } catch (error) {
-            console.error(error)
-        }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios.post(`${import.meta.env.VITE_API_URL}/api/contacts`, {
+        firstName,
+        lastName,
+        phone,
+      });
+      alert("Contact créé avec succès");
+    } catch (err) {
+      alert("Erreur lors de la création du contact");
     }
+  };
 
-    return (
-        <>
-            <form onSubmit={handleSubmit}>
-                <h1 className="mb-7">Créer un nouveau <b>contact</b></h1>
-
-                <label className="text-indigo-500">Nom : </label>
-                <input type="text" name="firstName" onChange={(e) => setFirstName(e.target.value)} /> 
-
-                <label className="text-indigo-500">Prénom : </label>
-                <input type="text" name="lastName" onChange={(e) => setLastName(e.target.value)} />
-
-                <label className="text-indigo-500">Numéro : </label>
-                <input type="text" name="phone" onChange={(e) => setNumber(e.target.value)} />
-
-                <button className="text-green-700" type="submit"> Ajouter</button>
-                <button className="text-amber-500 ml-5"><a href="/contact">Retour</a> </button>
-            </form>
-        </>
-    )
+  return (
+    <form onSubmit={handleSubmit}>
+      <h1>Créer un contact</h1>
+      <input
+        type="text"
+        placeholder="Prénom"
+        value={firstName}
+        onChange={(e) => setFirstName(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Nom"
+        value={lastName}
+        onChange={(e) => setLastName(e.target.value)}
+      />
+      <input
+        type="text"
+        placeholder="Téléphone"
+        value={phone}
+        onChange={(e) => setPhone(e.target.value)}
+      />
+      <button type="submit">Créer</button>
+      <Link to="/contacts">Retour</Link>
+    </form>
+  );
 }
 
-export default CreateContact
+export default CreateContact;
