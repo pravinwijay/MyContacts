@@ -14,7 +14,7 @@ function Contact() {
     const fetch = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get("http://localhost:3000/api/contact/all", {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/api/contact/all`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -31,7 +31,7 @@ function Contact() {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem("token");
-      await axios.delete(`http://localhost:3000/api/contact/${id}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/contact/${id}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
