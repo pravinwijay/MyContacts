@@ -1,44 +1,63 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+"use client"
 import axios from "axios";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+const API_URL = process.env.REACT_APP_API_URL;
 
 function Register() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
+    const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register`, {
-        email,
-        password,
-      });
-      alert("Inscription réussie");
-    } catch (err) {
-      alert("Erreur d’inscription");
+    // `${API_URL}/api/auth/register`
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        axios.post( `${import.meta.env.VITE_API_URL}/api/auth/register`, {
+            email,
+            password
+        }).then((res) => {
+            navigate("/connexion");
+            console.log(res);
+        }).catch((err) => {
+            console.log(err);
+        })
     }
-  };
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <h1>Inscription</h1>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Mot de passe"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button type="submit">S’inscrire</button>
-      <Link to="/">Retour à l’accueil</Link>
-      <Link to="/connexion">Se connecter</Link>
-    </form>
-  );
+    return (
+        <>
+            <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl">S'INSCRIRE</h1>
+            <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
+                <div className="mb-5">
+                    <label className="block mb-2 text-sm font-medium text-gray-900">Votre adresse mail :</label>
+                    <input
+                        type="email"
+                        id="email"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600"
+                        placeholder="email@email.com"
+                        onChange={(e) => setEmail(e.target.value)} />
+                </div>
+                <div className="mb-5">
+                    <label className="block mb-2 text-sm font-medium text-gray-900">Votre mot de passe :</label>
+                    <input
+                        type="password"
+                        id="password"
+                        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700"
+                        onChange={(e) => setPassword(e.target.value)} />
+                </div>
+                <button className="text-white bg-amber-500 hover:bg-amber-600 focus:ring-4 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mr-5">
+          <a href="/home">Retour à l'accueil</a>
+        </button>
+        <button type="submit" className="text-white bg-violet-600 hover:bg-violet-800 focus:ring-4 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
+          Inscription
+        </button>
+
+            </form>
+        </>
+    );
 }
 
-export default Register;
+export default Register
+
+// https://www.youtube.com/watch?v=ZVyIIyZJutM
+// https://www.youtube.com/watch?v=XOnmDZ9LNDM&t=265s
