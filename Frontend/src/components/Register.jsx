@@ -2,15 +2,18 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+const API_URL = process.env.REACT_APP_API_URL;
 
 function Register() {
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
     const navigate = useNavigate();
 
+    // `${API_URL}/api/auth/register`
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        axios.post("http://localhost:3000/api/auth/register", {
+        axios.post( `${API_URL}/api/auth/register`, {
             email,
             password
         }).then((res) => {

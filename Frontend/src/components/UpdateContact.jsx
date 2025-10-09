@@ -2,6 +2,9 @@
 import axios from "axios"
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+const API_URL = process.env.REACT_APP_API_URL;
+
+  // `${API_URL}/api/contact/`
 
 function UpdateContact() {
     const location = useLocation();
@@ -15,7 +18,7 @@ function UpdateContact() {
         try {
             const token = localStorage.getItem("token");
             const res = await axios.patch(
-                `http://localhost:3000/api/contact/${contact._id}`,
+                `${API_URL}/api/contact/${contact._id}`,
                 {
                     firstName,
                     lastName,

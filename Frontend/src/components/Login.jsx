@@ -2,15 +2,20 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+const API_URL = process.env.REACT_APP_API_URL;
+
 
 function Login() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const navigate = useNavigate();
 
+  // `${API_URL}/api/contact/`
+  // http://localhost:3000/api/auth/login
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    axios.post("http://localhost:3000/api/auth/login", {
+    axios.post(`${API_URL}/api/auth/login`, {
       email,
       password
     }).then((res) => {

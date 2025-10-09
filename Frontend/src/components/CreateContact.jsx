@@ -1,5 +1,6 @@
 import axios from "axios"
 import { useState } from "react"
+const API_URL = process.env.REACT_APP_API_URL;
 
 function CreateContact() {
     const [firstName, setFirstName] = useState("")
@@ -10,7 +11,7 @@ function CreateContact() {
         e.preventDefault();
         try {
             const token = localStorage.getItem("token");
-            const res = await axios.post(`http://localhost:3000/api/contact/`, 
+            const res = await axios.post(`${API_URL}/api/contact/`, 
                 { firstName, lastName, phone}, 
                 { headers: { Authorization: `Bearer ${token}` } })
             
