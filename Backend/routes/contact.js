@@ -103,14 +103,17 @@ router.post('/', auth, contactController.createContact);
  * /api/contact/{id}:
  *   put:
  *     summary: Update a contact by ID
+ *     description: Update the information of a contact belonging to the authenticated user.
  *     tags: [Contact]
+ *     security:
+ *       - bearerAuth: []  
  *     parameters:
  *       - in: path
  *         name: id
  *         required: true
  *         schema:
  *           type: string
- *         description: The contact ID.
+ *         description: The contact's unique ID.
  *     requestBody:
  *       required: true
  *       content:
@@ -121,12 +124,47 @@ router.post('/', auth, contactController.createContact);
  *               firstName:
  *                 type: string
  *                 description: The contact's first name.
+ *                 example: John
  *               lastName:
  *                 type: string
  *                 description: The contact's last name.
+ *                 example: Doe
  *               phone:
  *                 type: string
  *                 description: The contact's phone number.
+ *                 example: "0769476890"
+ *     responses:
+ *       200:
+ *         description: Contact updated successfully.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 _id:
+ *                   type: string
+ *                   description: The contact's ID.
+ *                 firstName:
+ *                   type: string
+ *                 lastName:
+ *                   type: string
+ *                 phone:
+ *                   type: string
+ *                 user:
+ *                   type: string
+ *                   description: The ID of the user who owns the contact.
+ *                 createdAt:
+ *                   type: string
+ *                   format: date-time
+ *                 updatedAt:
+ *                   type: string
+ *                   format: date-time
+ *       401:
+ *         description: Unauthorized. Token missing or invalid.
+ *       404:
+ *         description: Contact not found.
+ *       500:
+ *         description: Internal server error.
  */
 router.put('/:id', auth, contactController.updateContact);
 
