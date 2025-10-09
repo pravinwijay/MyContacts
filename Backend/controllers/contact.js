@@ -1,5 +1,7 @@
 const Contact = require('../models/Contact');
 
+//TODO : Passer par un Service
+
 // GET
 exports.getAllContacts = async (req, res) => {
     try {
@@ -27,15 +29,13 @@ exports.createContact = async (req, res) => {
 // UPDATE
 exports.updateContact = async (req, res) => {
     try {
-        const contact = await Contact.findOneAndUpdate(
-            { _id: req.params.id, user: req.auth.userId },
-            req.body,
-            { new: true }
-        );
+        const contactId = req.params.id;
+        const contactToUpdate = await Contact.findById(contactId);
+        const contact = await Contact.findByIdAndUpdate(contactId, {...req.body},{ new: true });
         if (!contact) {
             return res.status(404).json({ error: 'Contact non trouvé' });
         }
-        res.status(200).json(contact);
+        res.status(200).json(contactToUpdate.firstName); 
     } catch (error) {
         res.status(500).json({ error: 'Erreur serveur' });
     }

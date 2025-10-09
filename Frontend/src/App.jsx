@@ -5,6 +5,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './components/login';
 import Register from './components/Register';
 import Contact from './pages/Contact';
+import UpdateContact from './components/UpdateContact';
+import CreateContact from './components/CreateContact';
 
 
 function App() {
@@ -12,10 +14,14 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/connexion" element={<Login/>} />
-        <Route path="/inscription" element={<Register/>} />
-        <Route path="/home" element={<Home/>} />
-        <Route path="/contact" element={<Contact/>} />
+        <Route path="/home" element={<Home />} />
+        
+        <Route path="/connexion" element={<Login />} />
+        <Route path="/inscription" element={<Register />} />
+
+        <Route path="/contact" element={<Contact />} />
+        <Route path="/updateContact" element={<UpdateContact />} />
+        <Route path='/createContact' element={<CreateContact />} />
       </Routes>
     </BrowserRouter>
   );

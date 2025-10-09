@@ -2,11 +2,13 @@
 import axios from "axios"
 import { useState } from "react";
 import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 
 function Contact() {
   const [contacts, setContacts] = useState([]);
   const [error, setError] = useState(null);
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetch = async () => {
@@ -40,18 +42,8 @@ function Contact() {
     }
   }
 
-  const handleEdit = async (id, newName, newLastName, newNumber) => {
-    try {
-      const token = localStorage.getItem("token");
-      const res = await axios.put(
-        `http://localhost:3000/api/contact/${id}`,
-        { firstName: newName, lastName: newLastName, phone: newNumber },
-        { headers: { Authorization: `Bearer ${token}` } }
-      );
-      setContacts(contacts.map(c => c._id === id ? res.data : c));
-    } catch (err) {
-      console.error(err);
-    }
+  const handleEdit = (contact) => {
+    navigate("/updateContact", {state: {contact}});
   };
 
   return (
@@ -68,7 +60,7 @@ function Contact() {
                 Prénom :<strong> {contact.lastName}</strong> <br />
                 Tél. : <strong>{contact.phone}</strong> <br />
                 <button
-                  onClick={() => handleEdit(contact._id)}
+                  onClick={() => handleEdit(contact)}
                   className="text-indigo-800 px-2 py-1 rounded ml-5" >
                   Modifier
                 </button>
@@ -82,8 +74,12 @@ function Contact() {
           </ul>
         </>
       )}
-      <button className="text-white bg-amber-500 hover:bg-amber-600 focus:ring-4 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mr-5 mt-5">
+      <button className="text-white bg-amber-500 hover:bg-amber-600 focus:ring-4 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center mt-5">
         <a href="/home">Retour à l'accueil</a>
+      </button>
+
+      <button className="text-white bg-indigo-500 hover:bg-indigo-600 focus:ring-4 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center ml-5 mt-5">
+        <a href="/createContact">Ajouter un contact</a>
       </button>
     </>
   );

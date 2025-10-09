@@ -101,7 +101,7 @@ router.post('/', auth, contactController.createContact);
 /**
  * @swagger
  * /api/contact/{id}:
- *   put:
+ *   patch:
  *     summary: Update a contact by ID
  *     description: Update the information of a contact belonging to the authenticated user.
  *     tags: [Contact]
@@ -166,7 +166,7 @@ router.post('/', auth, contactController.createContact);
  *       500:
  *         description: Internal server error.
  */
-router.put('/:id', auth, contactController.updateContact);
+router.patch('/:id', auth, contactController.updateContact);
 
 /**
  * @swagger
