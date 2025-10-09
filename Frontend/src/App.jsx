@@ -2,8 +2,8 @@ import { useState } from 'react'
 import './App.css'
 import Home from './pages/home'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Login from './components/login';
 import Register from './components/Register';
+import Login from './components/Login';
 import Contact from './pages/Contact';
 import UpdateContact from './components/UpdateContact';
 import CreateContact from './components/CreateContact';
